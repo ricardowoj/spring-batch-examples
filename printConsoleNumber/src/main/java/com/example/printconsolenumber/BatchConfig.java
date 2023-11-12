@@ -41,7 +41,7 @@ public class BatchConfig {
     private Step printNumberStep() {
         return stepBuilderFactory
                 .get("printNumberStep")
-                .<Integer, String>chunk(1)
+                .<Integer, String>chunk(100)
                 .reader(countNumberReader())
                 .processor(pairOrOdProcessor())
                 .writer(printWriter())
@@ -51,7 +51,7 @@ public class BatchConfig {
     public ItemReader<Integer> countNumberReader() {
         Random rand = new Random();
         List<Integer> numbers = new ArrayList<>();
-        for (int i = 1; i <= 100; i++) {
+        for (int i = 1; i <= 100000; i++) {
             boolean numberValidation = true;
             while(numberValidation) {
                 int numberRand = rand.nextInt();
